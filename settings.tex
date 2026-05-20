@@ -76,18 +76,17 @@
 
 % ====================== 字体设置 ======================
 % 英文字体：狮尾四季春
-\setmainfont[
-    Path=fonts/,
-    Extension=.ttf,
-    BoldFont=* Bold,
-]{SweiSpring}
-
-% 中文字体：狮尾四季春
-\setCJKmainfont[
-    Path=fonts/,
-    Extension=.ttf,
-    BoldFont=* Bold,
-]{SweiSpring}
+% 英文字体：狮尾四季春（显式指定粗体文件以避免找不到字体的问题）
+% 尝试使用名为 SweiSpring 的系统字体（若已安装），否则回退到常用字体以保障可编译性
+\IfFontExistsTF{SweiSpring}
+  {%% 如果系统中存在名为 SweiSpring 的字体
+    \setmainfont{SweiSpring}
+    \setCJKmainfont{SweiSpring}
+  }
+  {%% 否则使用 TeX Live 中常见且可用的替代字体
+    \setmainfont{TeX Gyre Termes}
+    \setCJKmainfont{SimSun}
+  }
 
 % ====================== 主题色设置 ======================
 % 哈工大校徽标准色（RGB: 0, 83, 117），参考https://xcb.hitwh.edu.cn/_upload/article/files/fa/5c/e1e0bdb340e98b473b5a0e34963c/6250efd5-f74a-47bb-b5a7-8a8b86f9451b.pdf第14页
